@@ -1,39 +1,29 @@
-let data = [
-  {
-    name: "Brandon",
-    age: 29,
-  },
-  {
-    name: "Batman",
-    age: 50,
-  },
-  {
-    name: "Aquaman",
-    age: 37,
-  },
-];
-//Mutating array method - push
-data.push({
-  name: "Wonder woman",
-  age: 39,
-});
-// spread-operator - skapa kopia av array för att inte mutera originaldata
-let sortedData = [...data];
+let dataset1 = [1, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+let dataset2 = [0, 2, 4, 6, 8, 10];
 
-sortedData.sort((a, b) => a.age - b.age);
+let getUniqueValues = (arr1, arr2) => {
+  //filter-lösning
+  //   let uniqueValues1 = arr1.filter((num) => !arr2.includes(num));
+  //   let uniqueValues2 = arr2.filter((num) => !arr1.includes(num));
+  //   let uniqueValues = uniqueValues1.concat(uniqueValues2);
+  //Ta bort dubletter
 
-// Non-mutating array method - filter
 
-let filteredArray = data.filter((obj) => obj.age > 40);
+  //forEach-lösning
+  let uniqueValues = [];
 
-// console.log(filteredArray);
-
-//Funktion för att sortera en array baserat på valfri property med [] istället för .
-let sortArray = (arr, property) => {
-  let newArray = [...arr];
-  newArray.sort((a, b) => a[property] - b[property]);
-  return newArray;
+  arr1.forEach((num) => {
+    if (!arr2.includes(num) && !uniqueValues.includes(num)) {
+      uniqueValues.push(num);
+    }
+  });
+  arr2.forEach((num) => {
+    if (!arr1.includes(num) && !uniqueValues.includes(num)) {
+      uniqueValues.push(num);
+    }
+  });
+  return uniqueValues;
 };
 
-let sortedByAge = sortArray(data, "age");
-let sortedByName = sortArray(data, "name");
+console.log(getUniqueValues(dataset1, dataset2));
+
