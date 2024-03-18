@@ -1,39 +1,42 @@
-let data = [
-  {
-    name: "Brandon",
-    age: 29,
-  },
-  {
-    name: "Batman",
-    age: 50,
-  },
-  {
-    name: "Aquaman",
-    age: 37,
-  },
-];
-//Mutating array method - push
-data.push({
-  name: "Wonder woman",
-  age: 39,
-});
-// spread-operator - skapa kopia av array för att inte mutera originaldata
-let sortedData = [...data];
-
-sortedData.sort((a, b) => a.age - b.age);
-
-// Non-mutating array method - filter
-
-let filteredArray = data.filter((obj) => obj.age > 40);
-
-// console.log(filteredArray);
-
-//Funktion för att sortera en array baserat på valfri property med [] istället för .
-let sortArray = (arr, property) => {
-  let newArray = [...arr];
-  newArray.sort((a, b) => a[property] - b[property]);
-  return newArray;
+let hej = () => {
+  console.log("Hej!");
 };
 
-let sortedByAge = sortArray(data, "age");
-let sortedByName = sortArray(data, "name");
+let obj = {
+  hej: () => {
+    console.log("Hej!");
+  },
+};
+
+obj.hej();
+
+let population = 0;
+
+console.log("Hello world!".length);
+
+// let myArray = [1, 2, 3, 4, 5];
+let myArray = new Array(1, 2, 3, 4, 5);
+
+class Person {
+  constructor(namn, ålder) {
+    this.name = namn;
+    this.age = ålder;
+    population++;
+  }
+  greet() {
+    console.log("Hi my name is " + this.name);
+  }
+}
+// Instanser av klassen Person
+let myAvatar = new Person("Brandon", 29);
+let myFriend = new Person("Kalle", 28);
+
+myFriend.greet();
+console.log(myFriend.name);
+
+let checkPopulation = () => {
+  console.log(population);
+};
+
+let date = new Date();
+console.log(myAvatar.__proto__);
