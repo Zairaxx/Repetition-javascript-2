@@ -1,51 +1,59 @@
-//Extends-keywordet - Prototypkedjor
+// Statiska metoder
 
-class Person {
-  constructor(firstName, lastName) {
-    this.firstName = firstName;
-    this.lastName = lastName;
+let cars = [];
+
+class CarFactory {
+  constructor(name) {
+    this.name = name;
   }
+  static createCar(name, brand, year, topSpeed) {
+    let newCar = new Car(name, brand, year, topSpeed);
+    cars.push(newCar);
+  }
+}
 
+class Car {
+  constructor(name, brand, year, topSpeed) {
+    this.name = name;
+    this.brand = brand;
+    this.year = year;
+    this.topSpeed = topSpeed;
+  }
+}
+
+CarFactory.createCar("Toyota", "Corolla", 2024, 128);
+
+console.log(cars);
+
+// let fruits = ["Äpple", "päron"];
+// let fruits = new Array("Äpple", "päron");
+
+// fruits.filter();
+
+// Array.from(nodeList);
+
+// Super metoder
+
+class Student {
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+  }
   greeting() {
-    console.log("Hi my name is " + this.firstName + " " + this.lastName + "!");
-  }
-}
-class Teacher extends Person {
-  constructor(firstName, lastName, subjects, students = 0) {
-    super(firstName, lastName);
-    this.amountOfStudent = students;
-    this.subjects = subjects;
-    this.studentsGraded = 0;
-  }
-
-  gradeStudent(student, grade) {
-    student.grade = grade;
-    this.studentsGraded++;
+    return `Hi my name is ${this.name} and i am ${this.age} years old!`;
   }
 }
 
-class Student extends Person {
-  constructor(firstName, lastName, grade) {
-    super(firstName, lastName);
-    this.grade = grade;
+let student1 = new Student("Karl", 49);
+
+class StudentRepresentant extends Student {
+  royalGreeting() {
+    let normalGreeting = super.greeting();
+    return normalGreeting + ". By the way, I rule this class :)";
   }
 }
+console.log(student1.greeting());
 
-class SubstiteTeacher extends Teacher {
-  constructor(firstName, lastName, subjects) {
-    super(firstName, lastName, subjects);
-  }
-}
+let studentRep = new StudentRepresentant("Jon", 29);
 
-let t1 = new Teacher("Brandon", "Tsegai", 70, ["Frontend", "UX", "Backend"]);
-// console.log(t1.constructor.name);
-
-let s1 = new Student("Peter", "Waltz", "-");
-
-t1.gradeStudent(s1, "VG");
-console.log(s1);
-console.log(t1);
-
-let st = new SubstiteTeacher("Emma", "Gren", ["Frontend"]);
-
-st.greeting();
+console.log(studentRep.royalGreeting());
