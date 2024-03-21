@@ -1,59 +1,99 @@
-//Exempel på en funktion
+console.log("test");
 
-let hej = () => {
-  console.log("Hej!");
-};
-
-//Exempel på metod - Dvs en funktion i ett objekt
-let obj = {
-  hej: () => {
-    console.log("Hej!");
-  },
-};
-
-obj.hej();
-
-//Exempel på en sträng metod - En sträng är ett objekt
-
-console.log("Hello world!".length);
-
-// let myArray = [1, 2, 3, 4, 5];
-//Exempel på vad som händer egentligen när vi skapar en array - Vi skapar en instans av klassen Array.
-let myArray = new Array(1, 2, 3, 4, 5);
-
-let population = 0;
-
-//Exempel på en klass
-class Person {
-  constructor(namn, ålder) {
-    this.name = namn;
-    this.age = ålder;
-    //Varje gång en instans av denna klass skapas, ökar vi population med 1.
-    population++;
+class Book {
+  constructor(title, author) {
+    this.title = title;
+    this.author = author;
   }
-
-  //Exempel på en metod i Person-klassen.
-  greet() {
-    console.log("Hi my name is " + this.name);
+  getTitle() {
+    return "Titel: " + this.title;
+  }
+  getAuthor() {
+    return "Författare: " + this.author;
   }
 }
 
-// Instanser av klassen Person som kommer innehålla allt som klassen har.
+let book1 = new Book("Harry Potter", "J.K Rowling");
 
-let myAvatar = new Person("Brandon", 29);
-let myFriend = new Person("Kalle", 28);
+console.log(book1.getTitle());
 
-//Vi kan komma åt metoder och värden via våra nya instanser/objekt på följande sätt
-myFriend.greet();
-console.log(myFriend.name);
+class Employee {
+  constructor(firstName, lastName) {
+    // this.firstName = firstName
+    // this.lastName = lastName
+    this.fullName = firstName + " " + lastName;
+    this.fullName = {
+      firstName: firstName,
+      lastName: lastName,
+    };
+    this.email = `${firstName}.${lastName}@company.se`.toLowerCase();
+  }
+}
 
-let checkPopulation = () => {
-  console.log(population);
+let newEmployee = new Employee("John", "Smith");
+console.log(newEmployee);
+
+//Kalkylator
+
+class Calculator {
+  add(a, b) {
+    return a + b;
+  }
+  subtract(a, b) {
+    return a - b;
+  }
+  multiply(a, b) {
+    return a * b;
+  }
+  divide(a, b) {
+    return a / b;
+  }
+}
+
+let calculator = new Calculator();
+
+console.log(calculator.divide(10, 5));
+
+//Glass
+
+class IceCream {
+  constructor(flavor, numOfSprinkles) {
+    this.flavor = flavor;
+    this.numOfSprinkles = numOfSprinkles;
+  }
+}
+
+let chocoIceCream = new IceCream("Chocolate", 7);
+let vanillaIceCream = new IceCream("Vanilla", 16);
+let strawberryIceCream = new IceCream("Strawberry", 2);
+
+let calculateSweetness = (iceCream) => {
+  let sweetnessValue = iceCream.numOfSprinkles;
+  if (iceCream.flavor === "Vanilla" || iceCream.flavor === "ChocolateChip") {
+    sweetnessValue += 5;
+  } else if (
+    iceCream.flavor === "Strawberry" ||
+    iceCream.flavor === "Chocolate"
+  ) {
+    sweetnessValue += 10;
+  } else {
+    console.log("This is not a valid flavor");
+  }
+
+  return sweetnessValue;
 };
 
-// Date är ett exempel på en klass
-let date = new Date();
-//Exempel på hur man kan se vilka metoder som finns i objektets prototyp
+let getSweetest = (arr) => {
+  let highestSweetnessValue = 0;
 
-console.log(date.__proto__);
-console.log(myAvatar.__proto__);
+  arr.forEach((iceCream) => {
+    let sweetness = calculateSweetness(iceCream);
+    if (sweetness > highestSweetnessValue) {
+      highestSweetnessValue = sweetness;
+    }
+  });
+
+  return highestSweetnessValue;
+};
+
+console.log(getSweetest([chocoIceCream, vanillaIceCream, strawberryIceCream]));
